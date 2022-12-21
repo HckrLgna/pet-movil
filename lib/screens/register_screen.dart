@@ -5,9 +5,8 @@ import 'package:provider/provider.dart';
 import 'package:pets_movil/ui/input_decoration.dart';
 import 'package:pets_movil/widgets/widgets.dart';
 
-class LoginScreen extends StatelessWidget {
-   
-  const LoginScreen({Key? key}) : super(key: key);
+class RegisterScreen extends StatelessWidget {
+  
   
   @override
   Widget build(BuildContext context) {
@@ -26,7 +25,7 @@ class LoginScreen extends StatelessWidget {
                     const SizedBox(
                       height: 10,
                     ),
-                    Text("Login",style: Theme.of(context).textTheme.headline4),
+                    Text("Crear cuenta",style: Theme.of(context).textTheme.headline4),
                     const SizedBox(height: 30),
                      ChangeNotifierProvider(
                       create: ( _ ) => LoginFormProvider(),
@@ -38,12 +37,12 @@ class LoginScreen extends StatelessWidget {
               ),
               const SizedBox(height: 50),
               TextButton(
-                onPressed: () => Navigator.pushReplacementNamed(context, 'register'), 
+                onPressed: () => Navigator.pushReplacementNamed(context, 'login'), 
                 style: ButtonStyle(
                   overlayColor: MaterialStateProperty.all(Colors.indigo.withOpacity(0.1)),
                   shape: MaterialStateProperty.all(StadiumBorder())
                 ),
-                child: const Text('Crear una nueva cuenta',style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                child: const Text('Ya tienes una cuenta',style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                 ),
               const SizedBox(height: 50)
             ],

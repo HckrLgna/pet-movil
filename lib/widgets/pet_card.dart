@@ -23,7 +23,7 @@ class PetCard extends StatelessWidget {
               ),
             Positioned(
               top: 0,
-              right: 0,
+              right: 272,
               child: _NotFund()
               )
 
@@ -47,9 +47,6 @@ class PetCard extends StatelessWidget {
 }
 
 class _NotFund extends StatelessWidget {
-  const _NotFund({
-    Key? key,
-  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -58,14 +55,17 @@ class _NotFund extends StatelessWidget {
         fit: BoxFit.contain,
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 10),
-          child: Text('No encontrado',style: TextStyle(color: Colors.white , fontSize: 20),),
+          child: Text(
+            'Perdido',
+            style: TextStyle( color: Colors.white, fontSize: 20 ),
+          ),
         ),
       ),
       width: 100,
       height: 70,
       decoration: BoxDecoration(
-        color: Colors.yellow[888],
-        borderRadius: BorderRadius.only(topLeft: Radius.circular(25),bottomRight: Radius.circular(25))
+        color: Colors.yellow[800],
+        borderRadius: BorderRadius.only( topLeft: Radius.circular(25), bottomRight: Radius.circular(25) )
       ),
     );
   }
@@ -84,7 +84,7 @@ class _PriceTag extends StatelessWidget {
         fit: BoxFit.contain,
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 10),
-          child: Text('\102.99',style: TextStyle(color: Colors.white, fontSize: 20),),
+          child: Text(' R: \$102.99',style: TextStyle(color: Colors.white, fontSize: 20),),
         ),
       ),
       width: 100,
@@ -106,7 +106,7 @@ class _PetDetails extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         width: double.infinity,
-        height: 400,
+        height: 80,
         decoration: _buildBoxDecoration(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

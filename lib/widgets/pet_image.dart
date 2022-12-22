@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class PetImage extends StatelessWidget {
-  const PetImage({super.key});
+  final String? url;
+  const PetImage({Key? key, this.url}):super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,9 +14,11 @@ class PetImage extends StatelessWidget {
         height: 450,
         child: ClipRRect(
           borderRadius: BorderRadius.only(topLeft: Radius.circular(45),topRight: Radius.circular(45)),
-          child: FadeInImage(
+          child: this.url == null
+          ? const Image( image: AssetImage('assets/no-image.png'), fit: BoxFit.cover)
+          : FadeInImage(
             placeholder: AssetImage('assets/jar-loading.gif'), 
-            image: NetworkImage('https://via.placeholder.com/400x300/green'),
+            image: NetworkImage(this.url!),
             fit: BoxFit.cover
             ),
         ),

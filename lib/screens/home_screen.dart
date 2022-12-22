@@ -1,21 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:pets_movil/screens/screens.dart';
+import 'package:pets_movil/services/pets_service.dart';
+import 'package:provider/provider.dart';
+
+import 'package:pets_movil/services/services.dart';
 import 'package:pets_movil/widgets/widgets.dart';
 
+
+
 class HomeScreen extends StatelessWidget {
-   
-  const HomeScreen({Key? key}) : super(key: key);
-  
+
   @override
   Widget build(BuildContext context) {
+    final petsService = Provider.of<PetsService>(context);
+    if (petsService.isLoading) return LoadingScreen();
     return Scaffold(
       appBar: AppBar(
         title: Text('Productos'),
       ),
       body: ListView.builder(
-        itemCount: 10,
+        itemCount: petsService.pets.length,
         itemBuilder: (BuildContext context, index ) => GestureDetector(
-          onTap: () => Navigator.pushNamed(context, 'petScreen'),
-          child: PetCard()
+          onTap: () {
+            petsService.selectedPet = petsService.pets[index].copy();
+            Navigator.pushNamed(context, 'petScreen');
+          },
+          child: PetCard(
+            pet: petsService.pets[index],
+          )
           )
       
         ),

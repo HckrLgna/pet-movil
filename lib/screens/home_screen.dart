@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pets_movil/models/models.dart';
 import 'package:pets_movil/screens/screens.dart';
 import 'package:pets_movil/services/pets_service.dart';
 import 'package:provider/provider.dart';
@@ -34,7 +35,11 @@ class HomeScreen extends StatelessWidget {
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add),
           onPressed: () {
-            
+            petsService.selectedPet = new Pet(
+              found: true,
+              name: ''
+              );
+            Navigator.pushNamed(context, 'petScreen');
           },
           ),
     );

@@ -34,20 +34,29 @@ class PetsService extends ChangeNotifier{
     isSaving = true;
     notifyListeners();
     if(pet.id == null){
-
+      await this.createPet(pet);
     }else{
       await this.updatePet(pet);
     }
     isSaving = false;
     notifyListeners();
   }
-  Future<String?> updatePet(Pet pet)async{
+  Future<String> updatePet(Pet pet)async{
     final url = Uri.https(_baseUrl,'pets/${pet.id}.json');
     final resp = await http.put(url, body: pet.toJson());
     final decodeData = resp.body;
-    print(decodeData);
-    
-    return pet.id;
+    final index=this.pets.indexWhere((element) => element.id == pet.id);
+    this.pets[index] = pet;
+    return pet.id!;
   }
-  
+  Future<String> createPet(Pet pet)async{
+    final url = Uri.https(_baseUrl,'pet.json');
+    final resp = await http.post(url, body: pet.toJson());
+    final decodeData = jsonDecode( resp.body);
+    print(decodeData);
+    pet.id = decodeData['name'];
+    this.pets.add(pet);
+    //this.pets.add(value);
+    return pet.id!;
+  }
 }

@@ -12,15 +12,18 @@ class PetImage extends StatelessWidget {
         decoration: _buildBoxDecoration(),
         width: double.infinity,
         height: 450,
-        child: ClipRRect(
-          borderRadius: BorderRadius.only(topLeft: Radius.circular(45),topRight: Radius.circular(45)),
-          child: this.url == null
-          ? const Image( image: AssetImage('assets/no-image.png'), fit: BoxFit.cover)
-          : FadeInImage(
-            placeholder: AssetImage('assets/jar-loading.gif'), 
-            image: NetworkImage(this.url!),
-            fit: BoxFit.cover
-            ),
+        child: Opacity(
+          opacity: 0.9,
+          child: ClipRRect(
+            borderRadius: BorderRadius.only(topLeft: Radius.circular(45),topRight: Radius.circular(45)),
+            child: this.url == null
+            ? const Image( image: AssetImage('assets/no-image.png'), fit: BoxFit.cover)
+            : FadeInImage(
+              placeholder: AssetImage('assets/jar-loading.gif'), 
+              image: NetworkImage(this.url!),
+              fit: BoxFit.cover
+              ),
+          ),
         ),
       ),
     );

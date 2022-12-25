@@ -1,0 +1,1 @@
+export 'package:pets_movil/models/pets.dart';

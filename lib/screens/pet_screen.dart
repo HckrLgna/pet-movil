@@ -31,8 +31,10 @@ class _PetsScreenBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final petForm = Provider.of<PetFormProvider>(context);
     return Scaffold(
       body: SingleChildScrollView(
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: Column(
           children: [
             Stack(
@@ -65,9 +67,11 @@ class _PetsScreenBody extends StatelessWidget {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.save_alt_outlined),
-        onPressed: () {
+        child: const Icon(Icons.save_alt_outlined),
+        onPressed: () async {
           //TODO guardar mascota
+          if(!petForm.isValidForm()) return;
+          await petService.saveOrCreateProduct(petForm.pet);
         },
         ),
     );
@@ -88,6 +92,8 @@ class _PetForm extends StatelessWidget {
         
         decoration: _buildBoxDecoration(),
         child: Form(
+          key: petForm.formkey,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           child: Column(
             children: [ 
               //implementar un formulario completo
@@ -128,9 +134,7 @@ class _PetForm extends StatelessWidget {
                 value: pet.found, 
                 title: Text('Disponible'),
                 activeColor: Colors.indigo,
-                onChanged: (value) {
-                  
-                },
+                onChanged: (value) => petForm.updateAvailability(value)
               ),
               SizedBox(height: 30,)
             ],

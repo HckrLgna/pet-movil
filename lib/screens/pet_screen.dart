@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
+
 import 'package:pets_movil/providers/pet_form_provider.dart';
 import 'package:pets_movil/services/pets_service.dart';
 import 'package:pets_movil/ui/input_decoration.dart';
@@ -52,8 +54,20 @@ class _PetsScreenBody extends StatelessWidget {
                   top: 60,
                   right: 20,
                   child: IconButton(
-                    onPressed:() {
+                    onPressed:() async{
                       //TODO camara o galeria
+                        final picker = new ImagePicker();
+                        final PickedFile? pickedFile = await picker.getImage(
+                          source: ImageSource.camera,
+                          imageQuality: 100
+                          );
+                          if(pickedFile == null){
+                            print('no se selecciono nada');
+                            return;
+                          }
+                          print('tenemos imagen${pickedFile.path}');
+                          petService.updateSelectedProductImage(pickedFile.path);
+
                     },
                     icon: Icon(Icons.camera_alt_outlined, size: 40, color: Colors.white),
                     )
@@ -67,10 +81,16 @@ class _PetsScreenBody extends StatelessWidget {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.save_alt_outlined),
-        onPressed: () async {
+        child: petService.isSaving
+        ? CircularProgressIndicator(color: Colors.white,)
+        : Icon(Icons.save_alt_outlined),
+        onPressed: petService.isSaving ? null 
+          :() async {
           //TODO guardar mascota
           if(!petForm.isValidForm()) return;
+          final String? imageUrl = await petService.uploadImage();
+          if (imageUrl !=null) petForm.pet.picture = imageUrl;
+          print(imageUrl);
           await petService.saveOrCreateProduct(petForm.pet);
         },
         ),

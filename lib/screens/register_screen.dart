@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pets_movil/providers/login_form_provider.dart';
+import 'package:pets_movil/services/services.dart';
 import 'package:provider/provider.dart';
 
 import 'package:pets_movil/ui/input_decoration.dart';
@@ -106,7 +107,7 @@ class _LoginForm extends StatelessWidget {
               child: Container(
                 padding: EdgeInsets.symmetric( horizontal: 80, vertical: 15),
                 child: Text(
-                  LoginForm.isLoading ? 'Espere...' : 'Ingresar',
+                  LoginForm.isLoading ? 'Espere...' : 'Registrar',
             
                   style: TextStyle( color: Colors.white ),
                 )
@@ -114,12 +115,17 @@ class _LoginForm extends StatelessWidget {
               onPressed: LoginForm.isLoading ? null : () async {
                 //TODO: login form
                 FocusScope.of(context).unfocus();
+                final authService = Provider.of<AuthService>(context, listen: false);
                 if (!LoginForm.isValidForm())return;
                 LoginForm.isLoading = true;
-                //Navigator.pushReplacementNamed(context, 'home');
-                await Future.delayed(Duration(seconds: 2));
-                LoginForm.isLoading = false;
-                Navigator.pushReplacementNamed(context, 'home');
+                final String? errorMessage =  await authService.createUser(LoginForm.email,LoginForm.password);
+                if(errorMessage== null){
+                  Navigator.pushReplacementNamed(context, 'home');
+                }else{
+                  print(errorMessage);
+                  await Future.delayed(Duration(seconds: 2));
+                  LoginForm.isLoading = false;  
+                }
               },
             )
           ],

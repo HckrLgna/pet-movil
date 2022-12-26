@@ -11,7 +11,8 @@ class AppState extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: ( _ )=> PetsService() )
+        ChangeNotifierProvider(create: ( _ )=> PetsService() ),
+        ChangeNotifierProvider(create: ( _ ) => AuthService() )
       ],
       child: MyApp(),
       );
@@ -32,7 +33,9 @@ class MyApp extends StatelessWidget {
          'home' : ( _ ) =>  HomeScreen(),
          'register' : ( _ ) => RegisterScreen(),
          'petScreen' : ( _ ) => PetScreen(),
+         'checking': ( _ ) => CheckAuthScreen()
       },
+      scaffoldMessengerKey: NotificationsService.messengerKey,
       theme: ThemeData.light().copyWith(
         scaffoldBackgroundColor: Colors.grey[300],
         appBarTheme: const AppBarTheme(

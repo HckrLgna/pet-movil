@@ -14,10 +14,18 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final petsService = Provider.of<PetsService>(context);
+    final authService = Provider.of<AuthService>(context,listen: false);
     if (petsService.isLoading) return LoadingScreen();
     return Scaffold(
       appBar: AppBar(
         title: Text('Productos'),
+        leading: IconButton(
+          onPressed: () {
+            authService.logout();
+            Navigator.pushReplacementNamed(context, 'login');
+          }, 
+          icon: Icon(Icons.login_outlined)
+          ),
       ),
       body: ListView.builder(
         itemCount: petsService.pets.length,

@@ -18,7 +18,7 @@ class HomeScreen extends StatelessWidget {
     if (petsService.isLoading) return LoadingScreen();
     return Scaffold(
       appBar: AppBar(
-        title: Text('Productos'),
+        title: Text('Perros Perdidos'),
         leading: IconButton(
           onPressed: () {
             authService.logout();

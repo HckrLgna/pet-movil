@@ -11,7 +11,7 @@ class PetCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Container(
-        margin: EdgeInsets.only(top:30, bottom: 50),
+        margin: const EdgeInsets.only(top:30, bottom: 50),
         width: double.infinity,
         height: 400,
         decoration: _cardBorder(),
@@ -56,7 +56,6 @@ class PetCard extends StatelessWidget {
 }
 
 class _NotFund extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -116,7 +115,7 @@ class _PetDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(right: 50),
+      padding: const EdgeInsets.only(right: 50),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         width: double.infinity,
@@ -125,14 +124,12 @@ class _PetDetails extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text( title , style: TextStyle(fontSize: 20,color: Colors.white, fontWeight: FontWeight.bold),
+            Text( title , style: const TextStyle(fontSize: 20,color: Colors.white, fontWeight: FontWeight.bold),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             ),
-            Text(subTitle, style: TextStyle(fontSize: 15,color: Colors.white),
-          
+            Text(subTitle, style: const TextStyle(fontSize: 15,color: Colors.white),
             )
-            
           ],
         ),
       ),
@@ -158,11 +155,11 @@ class _backgroundImage extends StatelessWidget {
         height: 400,
         child: url == null 
         ? 
-        Image(image: AssetImage('assets/jar-loading.gif'), fit: BoxFit.cover, )
+        const Image(image: AssetImage('assets/jar-loading.gif'), fit: BoxFit.cover, )
         :
         FadeInImage(
           //TODO prod sin imagen
-          placeholder: AssetImage('assets/jar-loading.gif'), 
+          placeholder: const AssetImage('assets/jar-loading.gif'), 
           image: NetworkImage(url!),
           fit: BoxFit.cover,
           ),

@@ -17,8 +17,6 @@ class PetScreen extends StatelessWidget {
       create: ( _ )=> PetFormProvider(petService.selectedPet!),
       child: _PetsScreenBody(petService: petService),
     );
-
-    //return _PetsScreenBody(petService: petService);
   }
 }
 
@@ -29,8 +27,6 @@ class _PetsScreenBody extends StatelessWidget {
   }) : super(key: key);
 
   final PetsService petService;
-
-
   @override
   Widget build(BuildContext context) {
     final petForm = Provider.of<PetFormProvider>(context);
@@ -55,7 +51,7 @@ class _PetsScreenBody extends StatelessWidget {
                   right: 20,
                   child: IconButton(
                     onPressed:() async{
-                      //TODO camara o galeria
+                    
                         final picker = new ImagePicker();
                         final PickedFile? pickedFile = await picker.getImage(
                           source: ImageSource.camera,
@@ -67,7 +63,6 @@ class _PetsScreenBody extends StatelessWidget {
                           }
                           print('tenemos imagen${pickedFile.path}');
                           petService.updateSelectedProductImage(pickedFile.path);
-
                     },
                     icon: Icon(Icons.camera_alt_outlined, size: 40, color: Colors.white),
                     )
@@ -108,8 +103,7 @@ class _PetForm extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20),
-        width: double.infinity,
-        
+        width: double.infinity,    
         decoration: _buildBoxDecoration(),
         child: Form(
           key: petForm.formkey,
@@ -142,7 +136,6 @@ class _PetForm extends StatelessWidget {
                     pet.reward = int.parse(value)
                   }
                 },
-              
                 decoration: InputDecorations.authInputDecoration(
                   hintText: 'Precio de la recompensa', 
                   labelText: 'Recompensa'
@@ -152,7 +145,7 @@ class _PetForm extends StatelessWidget {
               
               SwitchListTile(
                 value: pet.found, 
-                title: Text('Disponible'),
+                title: Text('Perdido'),
                 activeColor: Colors.indigo,
                 onChanged: (value) => petForm.updateAvailability(value)
               ),
@@ -170,7 +163,7 @@ class _PetForm extends StatelessWidget {
     boxShadow: [
       BoxShadow(
         color: Colors.black.withOpacity(0.05),
-        offset: Offset(0, 5),
+        offset: const Offset(0, 5),
         blurRadius: 5
       )
     ] 

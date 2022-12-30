@@ -69,7 +69,8 @@ class _LoginForm extends StatelessWidget {
         autovalidateMode: AutovalidateMode.onUserInteraction,
         child: Column(
           children: [
-            TextFormField(
+            TextFormField(      
+              initialValue: 'jaime@correo.com',        
               autocorrect: false,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecorations.authInputDecoration(
@@ -84,8 +85,9 @@ class _LoginForm extends StatelessWidget {
                 return regExp.hasMatch(value ?? '') ? null : 'Ingrese un correo valido ';
               },
             ),
-            SizedBox(height: 30,),
+            const SizedBox(height: 30,),
             TextFormField(
+              initialValue: '123456',
               autocorrect: false,
               obscureText: true,
               keyboardType: TextInputType.emailAddress,
@@ -100,37 +102,36 @@ class _LoginForm extends StatelessWidget {
                 return 'la contraseña debe ser mayor a 6 caracteres';
               },
             ),
-            SizedBox(height: 30,),
+            const SizedBox(height: 30,),
             MaterialButton(
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
               disabledColor: Colors.grey,
               elevation: 0,
-              color: Colors.deepPurple,
-              child: Container(
-                padding: EdgeInsets.symmetric( horizontal: 80, vertical: 15),
-                child: Text(
-                  LoginForm.isLoading ? 'Espere...' : 'Ingresar',
-            
-                  style: TextStyle( color: Colors.white ),
-                )
-              ),
+              color: Colors.deepPurple,              
               onPressed: LoginForm.isLoading ? null : () async {
-
                 //TODO: login form
                 FocusScope.of(context).unfocus();
                 final authService = Provider.of<AuthService>(context, listen: false);
                 if (!LoginForm.isValidForm())return;
                 LoginForm.isLoading = true;
-                final String? errorMessage =  await authService.login(LoginForm.email,LoginForm.password);
+                // final String? errorMessage =  await authService.login(LoginForm.email,LoginForm.password);
+                String? errorMessage;
                 if(errorMessage== null){
                   Navigator.pushReplacementNamed(context, 'home');
                 }else{
                   print(errorMessage);
                   NotificationsService.showSnackbar(errorMessage);
-                  await Future.delayed(Duration(seconds: 2));
+                  await Future.delayed(const Duration(seconds: 2));
                   LoginForm.isLoading = false;  
                 }
               },
+              child: Container(
+                padding: const EdgeInsets.symmetric( horizontal: 80, vertical: 15),
+                child: Text(
+                  LoginForm.isLoading ? 'Espere...' : 'Ingresar',            
+                  style: const TextStyle( color: Colors.white ),
+                )
+              ),
             )
           ],
         )

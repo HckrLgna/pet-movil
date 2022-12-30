@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pets_movil/blocs/blocs.dart';
 import 'package:pets_movil/screens/screens.dart';
 import 'package:pets_movil/services/services.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +16,7 @@ class AppState extends StatelessWidget {
         ChangeNotifierProvider(create: ( _ )=> PetsService() ),
         ChangeNotifierProvider(create: ( _ ) => AuthService() )
       ],
-      child: MyApp(),
+      child: const MyApp(),
       );
   }
 }
@@ -24,28 +26,35 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Material App',
-      initialRoute: 'login',
-      routes: {
-        'login' : ( _ ) => const LoginScreen(),
-         'home' : ( _ ) =>  RoutesApp(),
-         'register' : ( _ ) => RegisterScreen(),
-         'petScreen' : ( _ ) => PetScreen(),
-         'checking': ( _ ) => CheckAuthScreen()
-      },
-      scaffoldMessengerKey: NotificationsService.messengerKey,
-      theme: ThemeData.light().copyWith(
-        scaffoldBackgroundColor: Colors.grey[300],
-        appBarTheme: const AppBarTheme(
-          elevation: 0,
-          color: Colors.indigo
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider( create: (context) => GpsBloc() ),
+        BlocProvider( create: (context) => LocationBloc() ),
+        BlocProvider(create: (context) => MapBloc( locationBloc: BlocProvider.of<LocationBloc>(context) )),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Material App',
+        initialRoute: 'login',
+        routes: {
+          'login' : ( _ ) => const LoginScreen(),
+           'home' : ( _ ) =>  RoutesApp(),
+           'register' : ( _ ) => RegisterScreen(),
+           'petScreen' : ( _ ) => PetScreen(),
+           'checking': ( _ ) => CheckAuthScreen()
+        },
+        scaffoldMessengerKey: NotificationsService.messengerKey,
+        theme: ThemeData.light().copyWith(
+          scaffoldBackgroundColor: Colors.grey[300],
+          appBarTheme: const AppBarTheme(
+            elevation: 0,
+            color: Colors.indigo
+          ),
+          floatingActionButtonTheme: const FloatingActionButtonThemeData(
+            backgroundColor: Colors.indigo,
+            elevation: 0
+          )
         ),
-        floatingActionButtonTheme: const FloatingActionButtonThemeData(
-          backgroundColor: Colors.indigo,
-          elevation: 0
-        )
       ),
     );
   }

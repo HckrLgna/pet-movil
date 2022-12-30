@@ -8,8 +8,7 @@ class LocationState extends Equatable {
 
   const LocationState({
     this.followingUser = false,
-    this.lastKnownLocation,
-    myLocationHistory    
+    this.lastKnownLocation,      
   });
 
   LocationState copyWith({

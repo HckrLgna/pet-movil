@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:pets_movil/blocs/blocs.dart';
 import 'package:pets_movil/views/views.dart';
 import 'package:pets_movil/widgets/widgets.dart';
@@ -40,22 +39,13 @@ class _MapScreenState extends State<MapScreen> {
           }
           return BlocBuilder<MapBloc, MapState>( // MapBloc
             builder: (context, mapState) {
-              
-              Map<String, Polyline> polylines = Map.from( mapState.polylines );
-              if ( !mapState.showMyRoute ) {
-                polylines.removeWhere((key, value) => key == 'myRoute');
-              }
-
               return Stack(
                 children: [
                   MapView( 
                     initialLocation: locationState.lastKnownLocation!,
-                    polylines: polylines.values.toSet(), 
+                    polylines: mapState.polylines.values.toSet(), 
                     markers: mapState.markers.values.toSet(),
-                  ),                    
-                  // const SearchBar2(), 
-                  // const ManualMarker()     
-                  // const BtnPlanesViaje()   
+                  ),                   
                 ]  
               );
             },
@@ -70,10 +60,7 @@ class _MapScreenState extends State<MapScreen> {
           }
           return Column(
             mainAxisAlignment: MainAxisAlignment.end,
-            children: const [          
-                // BtnRecorridoMicro(),                
-                // BtnPlanificadorViaje(),
-                // BtnPlanesViaje(),
+            children: const [           
                 BtnCurrentLocation(),
             ],
           );

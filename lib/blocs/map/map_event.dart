@@ -12,23 +12,6 @@ class OnMapInitialzedEvent extends MapEvent {
   const OnMapInitialzedEvent(this.controller);
 }
 
-class OnStopFollowingUserEvent extends MapEvent {}
-class OnStartFollowingUserEvent extends MapEvent {}
-
-class UpdateUserPolylineEvent extends MapEvent {
-  final List<LatLng> userLocations;
-  const UpdateUserPolylineEvent(this.userLocations);
-}
-
-class OnOrigenDestinoTextEvent extends MapEvent {
-  final List<String> origenDestinoText;
-  const OnOrigenDestinoTextEvent( this.origenDestinoText );
-}
-class OnOrigenDestinoCoordEvent extends MapEvent {
-  final List<LatLng> origenDestinoCoord;
-  const OnOrigenDestinoCoordEvent( this.origenDestinoCoord );
-}
-class OnToggleUserRoute extends MapEvent{}
 
 class DisplayPolylinesEvent extends MapEvent {
   final Map<String, Polyline> polylines;

@@ -26,12 +26,12 @@ class PetsService extends ChangeNotifier{
     final url  = Uri.https(_baseUrl, 'pets.json',{
       'auth':await storage.read(key: 'token')??''
     });
-    final resp = await http.get(url);
-    final Map<String,dynamic> productsMap = json.decode(resp.body);
+    final resp = await http.get(url);    
+    final Map<String,dynamic> productsMap = json.decode(resp.body);      
     productsMap.forEach((key, value) {
       final tempPet = Pet.fromMap(value);
       tempPet.id = key;
-      this.pets.add(tempPet);
+      this.pets.add(tempPet);      
     });
     this.isLoading =false;
     notifyListeners();

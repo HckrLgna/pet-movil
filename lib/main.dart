@@ -5,10 +5,10 @@ import 'package:pets_movil/screens/screens.dart';
 import 'package:pets_movil/services/services.dart';
 import 'package:provider/provider.dart';
 
-void main() => runApp(AppState());
+void main() => runApp( AppState());
 
 class AppState extends StatelessWidget {
-
+  const AppState({Key? key}) : super(key: key);  
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -21,16 +21,15 @@ class AppState extends StatelessWidget {
   }
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
+class MyApp extends StatelessWidget {  
+  const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider( create: (context) => GpsBloc() ),
         BlocProvider( create: (context) => LocationBloc() ),
-        BlocProvider(create: (context) => MapBloc( locationBloc: BlocProvider.of<LocationBloc>(context) )),
+        BlocProvider(create: (context) => MapBloc()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -38,10 +37,10 @@ class MyApp extends StatelessWidget {
         initialRoute: 'login',
         routes: {
           'login' : ( _ ) => const LoginScreen(),
-           'home' : ( _ ) =>  RoutesApp(),
-           'register' : ( _ ) => RegisterScreen(),
-           'petScreen' : ( _ ) => PetScreen(),
-           'checking': ( _ ) => CheckAuthScreen()
+          'home' : ( _ ) =>  const RoutesApp(),
+          'register' : ( _ ) => const RegisterScreen(),
+          'petScreen' : ( _ ) => const PetScreen(),
+          'checking': ( _ ) => const CheckAuthScreen()
         },
         scaffoldMessengerKey: NotificationsService.messengerKey,
         theme: ThemeData.light().copyWith(

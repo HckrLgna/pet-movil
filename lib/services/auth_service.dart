@@ -35,8 +35,8 @@ class AuthService extends ChangeNotifier{
 
   Future<String?> login (String email, String password)async{
     final Map<String,dynamic> authData={
-      'email': email,
-      'password': password,
+      'email': 'jaime@correo.com',
+      'password': '123456',
       'returnSecureToken': true
     };
     final url = Uri.https(_baseUrl,'/v1/accounts:signInWithPassword',{

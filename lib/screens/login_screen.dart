@@ -69,8 +69,8 @@ class _LoginForm extends StatelessWidget {
         autovalidateMode: AutovalidateMode.onUserInteraction,
         child: Column(
           children: [
-            TextFormField(      
-              initialValue: 'jaime@correo.com',        
+            TextFormField(   
+              initialValue: 'jaime@correo.com',                    
               autocorrect: false,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecorations.authInputDecoration(
@@ -86,8 +86,8 @@ class _LoginForm extends StatelessWidget {
               },
             ),
             const SizedBox(height: 30,),
-            TextFormField(
-              initialValue: '123456',
+            TextFormField(   
+              initialValue: '123456',           
               autocorrect: false,
               obscureText: true,
               keyboardType: TextInputType.emailAddress,
@@ -114,8 +114,7 @@ class _LoginForm extends StatelessWidget {
                 final authService = Provider.of<AuthService>(context, listen: false);
                 if (!LoginForm.isValidForm())return;
                 LoginForm.isLoading = true;
-                // final String? errorMessage =  await authService.login(LoginForm.email,LoginForm.password);
-                String? errorMessage;
+                final String? errorMessage =  await authService.login(LoginForm.email,LoginForm.password);                
                 if(errorMessage== null){
                   Navigator.pushReplacementNamed(context, 'home');
                 }else{

@@ -12,6 +12,11 @@ class OnMapInitialzedEvent extends MapEvent {
   const OnMapInitialzedEvent(this.controller);
 }
 
+class OnSetAddressEvent extends MapEvent {
+  final String address;
+  const OnSetAddressEvent( this.address );
+}
+class OnUnsetAddressEvent extends MapEvent {}
 
 class DisplayPolylinesEvent extends MapEvent {
   final Map<String, Polyline> polylines;

@@ -1,3 +1,5 @@
+export 'package:pets_movil/services/places_service.dart';
+
 export 'package:pets_movil/services/notifications_service.dart';
 
 export 'package:pets_movil/services/auth_service.dart';

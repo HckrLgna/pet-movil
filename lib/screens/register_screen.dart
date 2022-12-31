@@ -8,7 +8,7 @@ import 'package:pets_movil/widgets/widgets.dart';
 
 class RegisterScreen extends StatelessWidget {
   
-  
+  const RegisterScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     

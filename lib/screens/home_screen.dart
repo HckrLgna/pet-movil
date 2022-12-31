@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:pets_movil/models/models.dart';
 import 'package:pets_movil/screens/screens.dart';
-import 'package:pets_movil/services/pets_service.dart';
 import 'package:provider/provider.dart';
-
 import 'package:pets_movil/services/services.dart';
 import 'package:pets_movil/widgets/widgets.dart';
 
 
 
 class HomeScreen extends StatelessWidget {
-
+  const HomeScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final petsService = Provider.of<PetsService>(context);
@@ -42,11 +40,13 @@ class HomeScreen extends StatelessWidget {
       
         ),
         floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
+          child: const Icon(Icons.add),
           onPressed: () {
-            petsService.selectedPet = new Pet(
+            petsService.selectedPet = Pet(
               found: true,
-              name: ''
+              name: '',
+              reward: 0,
+              location: 'Ubicación de la mascota',
               );
             Navigator.pushNamed(context, 'petScreen');
           },

@@ -21,7 +21,8 @@ class BtnCurrentLocation extends StatelessWidget {
         backgroundColor: Colors.white,
         maxRadius: 30,
         child: IconButton(
-          icon: const Icon( Icons.my_location_outlined, color: Color.fromARGB(255, 14, 107, 184), size: 30 ),
+          iconSize: 35,
+          icon: const Icon( Icons.my_location_outlined, color: Colors.indigo),
           onPressed: () {
             final userLocation = locationBloc.state.lastKnownLocation;
             if ( userLocation == null ) {

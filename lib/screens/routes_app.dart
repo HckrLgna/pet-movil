@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pets_movil/screens/screens.dart';
 
 class RoutesApp extends StatefulWidget {
-  const RoutesApp({super.key});
+  const RoutesApp({Key? key}) : super(key: key);
 
   @override
   State<RoutesApp> createState() => _RoutesAppState();

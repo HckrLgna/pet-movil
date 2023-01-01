@@ -5,8 +5,12 @@ import 'package:pets_movil/screens/screens.dart';
 import 'package:pets_movil/services/services.dart';
 import 'package:provider/provider.dart';
 
-void main() => runApp( AppState());
-
+// void main() => runApp( AppState());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await PushNotificationService.initializeApp();
+  runApp(const AppState());
+}
 class AppState extends StatelessWidget {
   const AppState({Key? key}) : super(key: key);  
   @override
@@ -24,15 +28,15 @@ class AppState extends StatelessWidget {
 class MyApp extends StatelessWidget {  
   const MyApp({Key? key}) : super(key: key);
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {    
     return MultiBlocProvider(
       providers: [
         BlocProvider( create: (context) => GpsBloc() ),
         BlocProvider( create: (context) => LocationBloc() ),
-        BlocProvider(create: (context) => MapBloc()),
+        BlocProvider(create: (context) => MapBloc())        
       ],
       child: MaterialApp(
-        debugShowCheckedModeBanner: false,
+        debugShowCheckedModeBanner: false,        
         title: 'Material App',
         initialRoute: 'login',
         routes: {
@@ -44,7 +48,7 @@ class MyApp extends StatelessWidget {
         },
         scaffoldMessengerKey: NotificationsService.messengerKey,
         theme: ThemeData.light().copyWith(
-          scaffoldBackgroundColor: Colors.grey[300],
+          scaffoldBackgroundColor: Colors.grey[300],          
           appBarTheme: const AppBarTheme(
             elevation: 0,
             color: Colors.indigo

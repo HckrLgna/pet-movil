@@ -3,7 +3,11 @@ import 'package:pets_movil/screens/screens.dart';
 import 'package:pets_movil/services/services.dart';
 import 'package:provider/provider.dart';
 
-void main() => runApp(AppState());
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await PushNotificationService.initializeApp();
+  runApp(AppState());
+} 
 
 class AppState extends StatelessWidget {
 
@@ -19,20 +23,37 @@ class AppState extends StatelessWidget {
   }
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>(); 
+  @override
+  void initState() {
+    super.initState();
+    PushNotificationService.messagesStream.listen((message) {
+      navigatorKey.currentState?.pushNamed('search', arguments: message);
+      print('My app:$message');
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Material App',
       initialRoute: 'login',
+      navigatorKey: navigatorKey,
       routes: {
         'login' : ( _ ) => const LoginScreen(),
          'home' : ( _ ) =>  RoutesApp(),
          'register' : ( _ ) => RegisterScreen(),
          'petScreen' : ( _ ) => PetScreen(),
+         'search':  (_) => SearchScreen(),
+         'profile': ( _ ) => ProfileScreen(),
          'checking': ( _ ) => CheckAuthScreen()
       },
       scaffoldMessengerKey: NotificationsService.messengerKey,

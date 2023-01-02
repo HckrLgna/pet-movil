@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 
 class SearchScreen extends StatelessWidget {
-   
-  const SearchScreen({Key? key}) : super(key: key);
   
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    final args = ModalRoute.of(context)?.settings.arguments ?? 'No data';
+    return Scaffold(
       body: Center(
-         child: Text('SearchScreen'),
+         child: Text( '$args' , style: TextStyle(fontSize: 30)),
       ),
     );
   }

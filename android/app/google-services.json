@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "475274686716",
+    "firebase_url": "https://flutter-pet-73e62-default-rtdb.firebaseio.com",
+    "project_id": "flutter-pet-73e62",
+    "storage_bucket": "flutter-pet-73e62.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:475274686716:android:df130a2f1076a5a348e779",
+        "android_client_info": {
+          "package_name": "com.example.pets_movil"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "475274686716-v5pkgnjv1qiri69seq2oo12m3rsrs8pc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pets_movil",
+            "certificate_hash": "3ad67349a4f2e039f3a726c154a9582104c28971"
+          }
+        },
+        {
+          "client_id": "475274686716-djjj36jtj6c8l75lggobt8qguvj6lgv6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2nYJSl3Bpt7r_Nfm_PYzk80bxHcjP0-I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "475274686716-djjj36jtj6c8l75lggobt8qguvj6lgv6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

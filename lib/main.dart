@@ -29,18 +29,24 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider( create: (context) => GpsBloc() ),
+        BlocProvider( create: (context) => LocationBloc() ),
+        BlocProvider(create: (context) => MapBloc())        
+      ],
+      child: MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Material App',
       initialRoute: 'login',
       routes: {
         'login' : ( _ ) => const LoginScreen(),
-         'home' : ( _ ) =>  RoutesApp(),
-         'register' : ( _ ) => RegisterScreen(),
-         'petScreen' : ( _ ) => PetScreen(),
-         'search':  (_) => SearchScreen(),
-         'profile': ( _ ) => ProfileScreen(),
-         'checking': ( _ ) => CheckAuthScreen()
+        'home' : ( _ ) =>   const RoutesApp(),
+        'register' : ( _ ) =>  const RegisterScreen(),
+        'petScreen' : ( _ ) =>  const PetScreen(),
+        'search':  (_) =>  const SearchScreen(),
+        'profile': ( _ ) =>  const ProfileScreen(),
+        'checking': ( _ ) =>  const CheckAuthScreen()
       },
       scaffoldMessengerKey: NotificationsService.messengerKey,
       theme: ThemeData.light().copyWith(
@@ -54,6 +60,7 @@ class MyApp extends StatelessWidget {
           elevation: 0
         )
       ),
+      )
     );
   }
 }

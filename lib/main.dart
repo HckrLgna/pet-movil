@@ -28,36 +28,31 @@ class AppState extends StatelessWidget {
 class MyApp extends StatelessWidget {  
   const MyApp({Key? key}) : super(key: key);
   @override
-  Widget build(BuildContext context) {    
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider( create: (context) => GpsBloc() ),
-        BlocProvider( create: (context) => LocationBloc() ),
-        BlocProvider(create: (context) => MapBloc())        
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,        
-        title: 'Material App',
-        initialRoute: 'login',
-        routes: {
-          'login' : ( _ ) => const LoginScreen(),
-          'home' : ( _ ) =>  const RoutesApp(),
-          'register' : ( _ ) => const RegisterScreen(),
-          'petScreen' : ( _ ) => const PetScreen(),
-          'checking': ( _ ) => const CheckAuthScreen()
-        },
-        scaffoldMessengerKey: NotificationsService.messengerKey,
-        theme: ThemeData.light().copyWith(
-          scaffoldBackgroundColor: Colors.grey[300],          
-          appBarTheme: const AppBarTheme(
-            elevation: 0,
-            color: Colors.indigo
-          ),
-          floatingActionButtonTheme: const FloatingActionButtonThemeData(
-            backgroundColor: Colors.indigo,
-            elevation: 0
-          )
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Material App',
+      initialRoute: 'login',
+      routes: {
+        'login' : ( _ ) => const LoginScreen(),
+         'home' : ( _ ) =>  RoutesApp(),
+         'register' : ( _ ) => RegisterScreen(),
+         'petScreen' : ( _ ) => PetScreen(),
+         'search':  (_) => SearchScreen(),
+         'profile': ( _ ) => ProfileScreen(),
+         'checking': ( _ ) => CheckAuthScreen()
+      },
+      scaffoldMessengerKey: NotificationsService.messengerKey,
+      theme: ThemeData.light().copyWith(
+        scaffoldBackgroundColor: Colors.grey[300],
+        appBarTheme: const AppBarTheme(
+          elevation: 0,
+          color: Colors.indigo
         ),
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+          backgroundColor: Colors.indigo,
+          elevation: 0
+        )
       ),
     );
   }

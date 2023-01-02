@@ -13,6 +13,7 @@ class _RoutesAppState extends State<RoutesApp> {
   final List<Widget> widgetsChildern = [
       HomeScreen(),
       SearchScreen(),
+      ReconigtionScreen(),
       ProfileScreen()
 
   ];
@@ -27,7 +28,7 @@ class _RoutesAppState extends State<RoutesApp> {
       body: widgetsChildern[indexTap],
       bottomNavigationBar: Theme(
         data: Theme.of(context).copyWith(
-          canvasColor: Colors.white,
+          canvasColor: Colors.indigo,
           primaryColor: Colors.purple
         ),
         child: BottomNavigationBar(
@@ -41,6 +42,10 @@ class _RoutesAppState extends State<RoutesApp> {
               BottomNavigationBarItem(
                 icon: Icon(Icons.search),
                 label: 'search'
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.image_search),
+                label: 'reconigtion'
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.accessibility),

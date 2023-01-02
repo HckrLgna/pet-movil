@@ -58,7 +58,7 @@ class PetsService extends ChangeNotifier{
     return pet.id!;
   }
   Future<String> createPet(Pet pet)async{
-    final url = Uri.https(_baseUrl,'pet.json',
+    final url = Uri.https(_baseUrl,'pets.json',
       {'auth': await storage.read(key: 'token') ?? ''});
     final resp = await http.post(url, body: pet.toJson());
     final decodeData = jsonDecode( resp.body);

@@ -22,8 +22,6 @@ class PetScreen extends StatelessWidget {
       create: (_) => PetFormProvider(petService.selectedPet!),
       child: _PetsScreenBody(petService: petService),
     );
-
-    //return _PetsScreenBody(petService: petService);
   }
 }
 

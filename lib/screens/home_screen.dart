@@ -5,8 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:pets_movil/services/services.dart';
 import 'package:pets_movil/widgets/widgets.dart';
 
-
-
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
   @override
@@ -16,8 +14,7 @@ class HomeScreen extends StatelessWidget {
     if (petsService.isLoading) return LoadingScreen();
     return Scaffold(
       appBar: AppBar(
-        title: Text('Perros Perdidos'),
-        
+        title: Text('Perros Perdidos'),     
         leading: IconButton(
           onPressed: () {
             authService.logout();
@@ -37,7 +34,6 @@ class HomeScreen extends StatelessWidget {
             pet: petsService.pets[index],
           )
           )
-      
         ),
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),

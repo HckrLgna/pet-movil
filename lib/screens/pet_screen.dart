@@ -8,7 +8,8 @@ import 'package:image_picker/image_picker.dart';
 
 import 'package:pets_movil/providers/pet_form_provider.dart';
 import 'package:pets_movil/screens/screens.dart';
-import 'package:pets_movil/services/pets_service.dart';
+import 'package:pets_movil/services/services.dart';
+
 import 'package:pets_movil/ui/input_decoration.dart';
 import 'package:pets_movil/widgets/widgets.dart';
 import 'package:provider/provider.dart';
@@ -48,41 +49,35 @@ class _PetsScreenBody extends StatelessWidget {
                     child: IconButton(
                       onPressed: () => Navigator.of(context).pop(),
                       icon:
-                          Icon(Icons.arrow_back, size: 40, color: Colors.white),
+                          const Icon(Icons.arrow_back, size: 40, color: Colors.white),
                     )),
                 Positioned(
                     top: 60,
                     right: 20,
                     child: IconButton(
-                      onPressed: () async {
-                        //TODO camara o galeria
-                        final picker = new ImagePicker();
-                        final PickedFile? pickedFile = await picker.getImage(
-                            source: ImageSource.camera, imageQuality: 100);
-                        if (pickedFile == null) {
-                          print('no se selecciono nada');
+                      onPressed: () async {                       
+                        final picker = ImagePicker();
+                        final XFile? pickedFile = await picker.pickImage(
+                          source: ImageSource.camera, 
+                          imageQuality: 100,                          
+                        );
+                        if ( pickedFile == null ) {
+                          // print('no se selecciono nada');
                           return;
-                        }
-                        print('tenemos imagen${pickedFile.path}');
-                        petService.updateSelectedProductImage(pickedFile.path);
+                        }                        
+                        petService.updateSelectedProductImage( pickedFile.path );
                       },
-                      icon: Icon(Icons.camera_alt_outlined,
-                          size: 40, color: Colors.white),
+                      icon: const Icon(Icons.camera_alt_outlined, size: 40, color: Colors.white),
                     ))
               ],
             ),
-            _PetForm(),
-            SizedBox(height: 100)
+            const _PetForm(),
+            const SizedBox(height: 100)
           ],
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: FloatingActionButton(
-        child: petService.isSaving
-            ? CircularProgressIndicator(
-                color: Colors.white,
-              )
-            : Icon(Icons.save_alt_outlined),
         onPressed: petService.isSaving
             ? null
             : () async {
@@ -95,6 +90,12 @@ class _PetsScreenBody extends StatelessWidget {
                 // print(imageUrl);
                 await petService.saveOrCreateProduct(petForm.pet);
               },
+        child: petService.isSaving
+            ? const CircularProgressIndicator(
+                color: Colors.white,
+              )
+            : const Icon(Icons.save_alt_outlined),
+        
       ),
     );
   }

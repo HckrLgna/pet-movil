@@ -20,10 +20,10 @@ class ProfileScreen extends StatelessWidget {
               children: const [
                 HeaderAppBar(),                 
               ],
-            ),                   
-            PetCard( pet: petsService.pets[0] ),
-            PetCard( pet: petsService.pets[1] ),
-            PetCard( pet: petsService.pets[2] ),
+            ),
+            // PetCard( pet: petsService.pets[0] ),
+            // PetCard( pet: petsService.pets[1] ),
+            // PetCard( pet: petsService.pets[2] ),
           ],
           // child: Stack(        
           //   children: const [

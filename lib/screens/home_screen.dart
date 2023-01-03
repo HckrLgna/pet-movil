@@ -9,9 +9,9 @@ class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final petsService = Provider.of<PetsService>(context);
+    final petsService = Provider.of<PetsService2>(context);
     final authService = Provider.of<AuthService2>(context,listen: false);
-    if (petsService.isLoading) return const LoadingScreen();
+    if ( petsService.isLoading ) return const LoadingScreen();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Perros Perdidos'),     
@@ -20,30 +20,26 @@ class HomeScreen extends StatelessWidget {
             authService.logout();
             Navigator.pushReplacementNamed(context, 'login');
           }, 
-          icon: const Icon(Icons.login_outlined)
+          icon: const Icon( Icons.login_outlined )
           ),
       ),
       body: ListView.builder(
         itemCount: petsService.pets.length,
         itemBuilder: (BuildContext context, index ) => GestureDetector(
           onTap: () {
-            petsService.selectedPet = petsService.pets[index].copy();
+            petsService.selectedPet = petsService.pets[index];
             Navigator.pushNamed(context, 'petScreen');
           },
-          child: PetCard(
-            pet: petsService.pets[index],
-          )
-          )
-        ),
+          child: PetCard( pet: petsService.pets[index] )
+        )),
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
           onPressed: () {
-            petsService.selectedPet = Pet(
-              found: true,
-              name: '',
-              reward: 0,
-              location: 'Ubicación de la mascota',
-              );
+            petsService.selectedPet = Mascota(
+              color: 'Cafe',
+              estado: 'Encontrado',
+              raza: 'Doberman'
+            );
             Navigator.pushNamed(context, 'petScreen');
           },
           ),

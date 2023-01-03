@@ -45,8 +45,9 @@ class _MapScreenState extends State<MapScreen> {
                     initialLocation: locationState.lastKnownLocation!,
                     polylines: mapState.polylines.values.toSet(), 
                     markers: mapState.markers.values.toSet(),
-                  ),  
-                  const ManualMarker()                 
+                  ),
+                  if ( !mapState.isMarkersDisplayed )  
+                    const ManualMarker()                 
                 ]  
               );
             },

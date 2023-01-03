@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pets_movil/blocs/blocs.dart';
 import 'package:pets_movil/screens/screens.dart';
 
 class RoutesApp extends StatefulWidget {
@@ -11,19 +13,27 @@ class RoutesApp extends StatefulWidget {
 class _RoutesAppState extends State<RoutesApp> {
   int indexTap=0;
   final List<Widget> widgetsChildern = [
-      HomeScreen(),
-      SearchScreen(),
-      ReconigtionScreen(),
-      ProfileScreen()
-
-  ];
-  void onTapTapped(int index){
-    setState(() {
-      indexTap=index;
-    });
-  }
+      const HomeScreen(),
+      const SearchScreen(),
+      const ReconigtionScreen(),
+      const ProfileScreen()
+  ];  
   @override
   Widget build(BuildContext context) {
+    final mapBloc = BlocProvider.of<MapBloc>(context);
+    void onTapTapped(int index){
+      setState(() {
+        if ( index == 0 ){
+          mapBloc.add( OnHideMarkers() );          
+        }
+        if ( index == 1 ){
+          mapBloc.add( OnShowMarkers() );
+          mapBloc.showMarcadores();
+        }        
+        indexTap = index;
+      });
+    }
+
     return Scaffold(
       body: widgetsChildern[indexTap],
       bottomNavigationBar: Theme(
@@ -41,7 +51,7 @@ class _RoutesAppState extends State<RoutesApp> {
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.search),
-                label: 'search'
+                label: 'search',                
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.image_search),

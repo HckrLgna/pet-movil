@@ -24,8 +24,9 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     on<OnMapInitialzedEvent>( _onInitMap );    
     on<DisplayPolylinesEvent>((event, emit) => emit( state.copyWith( polylines: event.polylines, markers: event.markers ) ));
     on<OnSetAddressEvent>((event, emit) => emit( state.copyWith( address: event.address ) ));
-    on<OnUnsetAddressEvent>((event, emit) => emit( state.copyWith( address: 'Ubicación de la mascota' ) ));
-    // showMarcadores();
+    on<OnShowMarkers>((event, emit) => emit( state.copyWith( isMarkersDisplayed: true ) ));
+    on<OnHideMarkers>((event, emit) => emit( state.copyWith( isMarkersDisplayed: false, polylines: {}, markers: {} ) ));
+    on<OnUnsetAddressEvent>((event, emit) => emit( state.copyWith( address: 'Ubicación de la mascota' ) ));        
   } 
 
   void _onInitMap( OnMapInitialzedEvent event, Emitter<MapState> emit ) {

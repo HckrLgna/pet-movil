@@ -10,17 +10,17 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final petsService = Provider.of<PetsService>(context);
-    final authService = Provider.of<AuthService>(context,listen: false);
-    if (petsService.isLoading) return LoadingScreen();
+    final authService = Provider.of<AuthService2>(context,listen: false);
+    if (petsService.isLoading) return const LoadingScreen();
     return Scaffold(
       appBar: AppBar(
-        title: Text('Perros Perdidos'),     
+        title: const Text('Perros Perdidos'),     
         leading: IconButton(
           onPressed: () {
             authService.logout();
             Navigator.pushReplacementNamed(context, 'login');
           }, 
-          icon: Icon(Icons.login_outlined)
+          icon: const Icon(Icons.login_outlined)
           ),
       ),
       body: ListView.builder(

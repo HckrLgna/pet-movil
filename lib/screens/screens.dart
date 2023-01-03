@@ -1,5 +1,7 @@
 
 
+export 'package:pets_movil/screens/registrar_mascota_screen.dart';
+
 export 'package:pets_movil/screens/check_permission_screen.dart';
 
 export 'package:pets_movil/screens/map_screen.dart';

@@ -497,6 +497,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.4.14"
+  tflite_maven:
+    dependency: "direct main"
+    description:
+      path: "lib/my_new_package"
+      relative: true
+    source: path
+    version: "1.1.6"
   typed_data:
     dependency: transitive
     description:

@@ -76,7 +76,7 @@ class _PetsScreenBody extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: FloatingActionButton(
         child: petService.isSaving
             ? CircularProgressIndicator(
@@ -90,10 +90,10 @@ class _PetsScreenBody extends StatelessWidget {
 
                 if (!petForm.isValidForm()) return;
                 // mapBloc.add( OnUnsetAddressEvent() );
-                // final String? imageUrl = await petService.uploadImage();
-                // if (imageUrl != null) petForm.pet.picture = imageUrl;
+                final String? imageUrl = await petService.uploadImage();
+                if ( imageUrl != null ) petForm.pet.picture = imageUrl;
                 // print(imageUrl);
-                // await petService.saveOrCreateProduct(petForm.pet);
+                await petService.saveOrCreateProduct(petForm.pet);
               },
       ),
     );

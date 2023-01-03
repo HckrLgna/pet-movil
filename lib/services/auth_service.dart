@@ -6,7 +6,7 @@ import 'dart:convert';
 class AuthService extends ChangeNotifier{
   final String _baseUrl = 'identitytoolkit.googleapis.com';
   final String _firebaseToken ='AIzaSyCRe3SVBZ1mqsu-JG6fDVdhOQzFUUT7hNA';
-  final storage = new FlutterSecureStorage();
+  final storage = const FlutterSecureStorage();
 
   //si se retorna algo es un error
   Future<String?> createUser (String email, String password)async{
@@ -21,7 +21,7 @@ class AuthService extends ChangeNotifier{
     });
     final resp = await http.post(url,body: json.encode(authData));
     final Map<String,dynamic> decodeResp = json.decode(resp.body);
-    print(decodeResp);
+    // print(decodeResp);
     if(decodeResp.containsKey('idToken')){
       //token hay que guardarlo en un lugar seguro
       //return decodeResp['idToken'];
@@ -44,7 +44,7 @@ class AuthService extends ChangeNotifier{
     });
     final resp = await http.post(url,body: json.encode(authData));
     final Map<String,dynamic> decodeResp = json.decode(resp.body);
-    print(decodeResp);
+    // print(decodeResp);
     if(decodeResp.containsKey('idToken')){
       //token hay que guardarlo en un lugar seguro
       //return decodeResp['idPToken'];

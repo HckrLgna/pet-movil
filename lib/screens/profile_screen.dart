@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:pets_movil/screens/screens.dart';
+import 'package:pets_movil/services/services.dart';
 import 'package:pets_movil/widgets/widgets.dart';
+import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatelessWidget {
   
@@ -7,14 +10,41 @@ class ProfileScreen extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
+    final petsService = Provider.of<PetsService>(context);    
+    if (petsService.isLoading) return const LoadingScreen();
     return Scaffold(
-      body: Stack(
-        children: const [
-          HeaderAppBar(),          
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Stack(        
+              children: const [
+                HeaderAppBar(),                 
+              ],
+            ),                   
+            PetCard( pet: petsService.pets[0] ),
+            PetCard( pet: petsService.pets[1] ),
+            PetCard( pet: petsService.pets[2] ),
+          ],
+          // child: Stack(        
+          //   children: const [
+          //     HeaderAppBar(),          
+              // ListView.builder(
+              //   itemCount: petsService.pets.length,
+              //   itemBuilder: (BuildContext context, index ) => GestureDetector(
+              //     onTap: () {
+              //       petsService.selectedPet = petsService.pets[index].copy();
+              //       Navigator.pushNamed(context, 'petScreen');
+              //     },
+              //     child: PetCard(
+              //       pet: petsService.pets[index],
+              //     )
+              //     )
+              // ),          
+            // ],
+          // ),
+        ),
       ),
-      //body: BodyPage(),
-      
+      //body: BodyPage(),            
     );
   }
 }
@@ -50,8 +80,7 @@ class GradientBack extends StatelessWidget {
   // Gradient_back(this.title);
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
+    return Container(      
       height: 300.0,
       decoration: const BoxDecoration(
         gradient: LinearGradient(

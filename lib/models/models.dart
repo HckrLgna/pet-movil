@@ -1,3 +1,5 @@
+export 'package:pets_movil/models/login_response.dart';
+
 export 'package:pets_movil/models/route_destination.dart';
 
 export 'package:pets_movil/models/places_models.dart';

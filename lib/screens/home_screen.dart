@@ -1,48 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:pets_movil/models/models.dart';
 import 'package:pets_movil/screens/screens.dart';
-import 'package:pets_movil/services/pets_service.dart';
 import 'package:provider/provider.dart';
-
 import 'package:pets_movil/services/services.dart';
 import 'package:pets_movil/widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
+  const HomeScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final petsService = Provider.of<PetsService>(context);
-    final authService = Provider.of<AuthService>(context,listen: false);
-    if (petsService.isLoading) return LoadingScreen();
+    final petsService = Provider.of<PetsService2>(context);
+    final authService = Provider.of<AuthService2>(context,listen: false);
+    if ( petsService.isLoading ) return const LoadingScreen();
     return Scaffold(
       appBar: AppBar(
-        title: Text('Perros Perdidos'),     
+        title: const Text('Perros Perdidos'),     
         leading: IconButton(
           onPressed: () {
             authService.logout();
             Navigator.pushReplacementNamed(context, 'login');
           }, 
-          icon: Icon(Icons.login_outlined)
+          icon: const Icon( Icons.login_outlined )
           ),
       ),
       body: ListView.builder(
         itemCount: petsService.pets.length,
         itemBuilder: (BuildContext context, index ) => GestureDetector(
           onTap: () {
-            petsService.selectedPet = petsService.pets[index].copy();
+            petsService.selectedPet = petsService.pets[index];
             Navigator.pushNamed(context, 'petScreen');
           },
-          child: PetCard(
-            pet: petsService.pets[index],
-          )
-          )
-        ),
+          child: PetCard( pet: petsService.pets[index] )
+        )),
         floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
+          child: const Icon(Icons.add),
           onPressed: () {
-            petsService.selectedPet = new Pet(
-              found: true,
-              name: ''
-              );
+            petsService.selectedPet = Mascota(
+              color: 'Cafe',
+              estado: 'Encontrado',
+              raza: 'Doberman'
+            );
             Navigator.pushNamed(context, 'petScreen');
           },
           ),

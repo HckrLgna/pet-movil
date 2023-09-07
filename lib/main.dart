@@ -1,60 +1,54 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pets_movil/blocs/blocs.dart';
 import 'package:pets_movil/screens/screens.dart';
 import 'package:pets_movil/services/services.dart';
 import 'package:provider/provider.dart';
 
-void main() async{
+// void main() => runApp( AppState());
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   //await PushNotificationService.initializeApp();
   runApp(AppState());
 } 
 
 class AppState extends StatelessWidget {
-
+  const AppState({Key? key}) : super(key: key);  
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: ( _ )=> PetsService() ),
-        ChangeNotifierProvider(create: ( _ ) => AuthService() )
+        ChangeNotifierProvider(create: ( _ )=> PetsService2() ),
+        ChangeNotifierProvider(create: ( _ ) => AuthService2() )
       ],
-      child: MyApp(),
+      child: const MyApp(),
       );
   }
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>(); 
-  @override
-  void initState() {
-    super.initState();
-    PushNotificationService.messagesStream.listen((message) {
-      navigatorKey.currentState?.pushNamed('search', arguments: message);
-      print('My app:$message');
-    });
-  }
+class MyApp extends StatelessWidget {  
+  const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider( create: (context) => GpsBloc() ),
+        BlocProvider( create: (context) => LocationBloc() ),
+        BlocProvider(create: (context) => MapBloc())        
+      ],
+      child: MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Material App',
       initialRoute: 'login',
-      navigatorKey: navigatorKey,
       routes: {
         'login' : ( _ ) => const LoginScreen(),
-         'home' : ( _ ) =>  RoutesApp(),
-         'register' : ( _ ) => RegisterScreen(),
-         'petScreen' : ( _ ) => PetScreen(),
-         'search':  (_) => SearchScreen(),
-         'profile': ( _ ) => ProfileScreen(),
-         'checking': ( _ ) => CheckAuthScreen()
+        'home' : ( _ ) =>   const RoutesApp(),
+        'register' : ( _ ) =>  const RegisterScreen(),
+        'petScreen' : ( _ ) =>  const PetScreen(),
+        'search':  (_) =>  const SearchScreen(),
+        'profile': ( _ ) =>  const ProfileScreen(),
+        'checking': ( _ ) =>  const CheckAuthScreen()
       },
       scaffoldMessengerKey: NotificationsService.messengerKey,
       theme: ThemeData.light().copyWith(
@@ -68,6 +62,7 @@ class _MyAppState extends State<MyApp> {
           elevation: 0
         )
       ),
+      )
     );
   }
 }

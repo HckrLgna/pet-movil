@@ -10,7 +10,7 @@ class PetsService extends ChangeNotifier{
   final String _baseUrl = 'pets-b8a4e-default-rtdb.firebaseio.com';
   final List<Pet> pets = [];
   late Pet? selectedPet;
-  final storage = new FlutterSecureStorage();
+  final storage = const FlutterSecureStorage();
 
   File? newPictureFile;
   bool isLoading = true;
@@ -23,15 +23,16 @@ class PetsService extends ChangeNotifier{
   Future<List<Pet>> loadPets() async {
     this.isLoading = true;
     notifyListeners();
-    final url  = Uri.https(_baseUrl, 'pets.json',{
-      'auth':await storage.read(key: 'token')??''
-    });
-    final resp = await http.get(url);
-    final Map<String,dynamic> productsMap = json.decode(resp.body);
+    // final url  = Uri.https(_baseUrl, 'pets.json',{
+    //   'auth':await storage.read(key: 'token')??''
+    // });
+    final url  = Uri.https(_baseUrl, 'pets.json');
+    final resp = await http.get(url);    
+    final Map<String,dynamic> productsMap = json.decode(resp.body);      
     productsMap.forEach((key, value) {
       final tempPet = Pet.fromMap(value);
       tempPet.id = key;
-      this.pets.add(tempPet);
+      this.pets.add(tempPet);      
     });
     this.isLoading =false;
     notifyListeners();

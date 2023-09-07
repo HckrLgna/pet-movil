@@ -15,9 +15,11 @@ class PetFormProvider extends ChangeNotifier{
   }
 
   bool isValidForm(){
-    print(pet.name);
+    print('VALORES DEL FORMULARIO');
     print(pet.picture);
+    print(pet.name);
     print(pet.reward);
+    print(pet.location);
     return formkey.currentState?.validate() ?? false;
   }
 }

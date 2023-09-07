@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:pets_movil/screens/screens.dart';
+
 
 class SearchScreen extends StatelessWidget {
-  
+  const SearchScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)?.settings.arguments ?? 'No data';
-    return Scaffold(
-      body: Center(
-         child: Text( '$args' , style: TextStyle(fontSize: 30)),
-      ),
-    );
+    return const CheckPermissionScreen();
   }
 }
+
+

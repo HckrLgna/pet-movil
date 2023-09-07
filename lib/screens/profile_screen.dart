@@ -1,47 +1,72 @@
 import 'package:flutter/material.dart';
-import 'package:pets_movil/widgets/widgets.dart';
 import 'package:pets_movil/screens/screens.dart';
-
+import 'package:pets_movil/services/services.dart';
+import 'package:pets_movil/widgets/widgets.dart';
+import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatelessWidget {
-   
+  
   const ProfileScreen({Key? key}) : super(key: key);
   
   @override
   Widget build(BuildContext context) {
+    final petsService = Provider.of<PetsService>(context);    
+    if (petsService.isLoading) return const LoadingScreen();
     return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          headerAppBar(),
-          ListView(
-            children: <Widget>[
-              
-              
-            ],
-          )
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Stack(        
+              children: const [
+                HeaderAppBar(),                 
+              ],
+            ),
+            // PetCard( pet: petsService.pets[0] ),
+            // PetCard( pet: petsService.pets[1] ),
+            // PetCard( pet: petsService.pets[2] ),
+          ],
+          // child: Stack(        
+          //   children: const [
+          //     HeaderAppBar(),          
+              // ListView.builder(
+              //   itemCount: petsService.pets.length,
+              //   itemBuilder: (BuildContext context, index ) => GestureDetector(
+              //     onTap: () {
+              //       petsService.selectedPet = petsService.pets[index].copy();
+              //       Navigator.pushNamed(context, 'petScreen');
+              //     },
+              //     child: PetCard(
+              //       pet: petsService.pets[index],
+              //     )
+              //     )
+              // ),          
+            // ],
+          // ),
+        ),
       ),
-      //body: BodyPage(),
-      
+      //body: BodyPage(),            
     );
   }
 }
 
 
-class headerAppBar extends StatelessWidget {
-  String ruta=    "assets/profile.jpg";
-  String nombre = "Ezequiel Alcantara";
-  String correo = "ezeq@gmail.com";
+class HeaderAppBar extends StatelessWidget {
+
+  const HeaderAppBar({Key? key}) : super(key: key);
+
+  final String ruta=    "assets/profile.jpg";
+  final String nombre = "Ezequiel Alcantara";
+  final String correo = "ezeq@gmail.com";
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        Gradient_back("Profile"),
+        const GradientBack("Profile"),
         Column(
           children: <Widget> [
-            dataProfile(ruta,nombre,correo),
-            optionList()
+            DataProfile( path: ruta, name: nombre, email: correo ),
+            const optionList()
           ] 
         )
       ],
@@ -49,13 +74,13 @@ class headerAppBar extends StatelessWidget {
   }
 }
 
-class Gradient_back extends StatelessWidget {
-  String title = "popular";
-  Gradient_back(this.title);
+class GradientBack extends StatelessWidget {
+  final String title;
+  const GradientBack( this.title, {Key? key}) : super(key: key);
+  // Gradient_back(this.title);
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
+    return Container(      
       height: 300.0,
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -69,27 +94,26 @@ class Gradient_back extends StatelessWidget {
           tileMode: TileMode.clamp
         )
       ),
+      alignment: const Alignment(-0.9, -0.6),
       child: Text(
       title,
-      style: TextStyle(
+      style: const TextStyle(
         color: Colors.white,
         fontSize: 30.0,
         fontFamily: "Lato",
-        fontWeight: FontWeight.bold
-        
-      )
-      
+        fontWeight: FontWeight.bold        
+      )      
       ),
-      alignment: Alignment(-0.9, -0.6),
     );
   }
 } 
 
-class dataProfile extends StatelessWidget {
-  String path ="";
-  String name ="";
-  String email ="";
-  dataProfile(this.path,this.name,this.email);
+class DataProfile extends StatelessWidget {
+  final String path;
+  final String name;
+  final String email;
+  const DataProfile({Key? key, required this.path, required this.name, required this.email}) : super(key: key);
+  
   @override
   Widget build(BuildContext context) {
     final photo = Container(

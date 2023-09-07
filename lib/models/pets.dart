@@ -8,6 +8,7 @@ class Pet {
     Pet({
         required this.found,
         required this.name,
+        this.location,
         this.picture,
         this.reward,
         this.id
@@ -15,6 +16,7 @@ class Pet {
 
     bool found;
     String name;
+    String? location;
     String? picture;
     int? reward;
     String? id;
@@ -26,6 +28,7 @@ class Pet {
     factory Pet.fromMap(Map<String, dynamic> json) => Pet(
         found: json["found"],
         name: json["name"],
+        location: json["location"],
         picture: json["picture"],
         reward: json["reward"],
     );
@@ -33,14 +36,16 @@ class Pet {
     Map<String, dynamic> toMap() => {
         "found": found,
         "name": name,
+        "location" : location,
         "picture": picture,
         "reward": reward,
     };
     Pet copy()=> Pet(
-      found: this.found, 
-      name: this.name,
-      picture: this.picture,
-      reward: this.reward,
-      id: this.id,
+      found: found, 
+      name: name,
+      location: location,
+      picture: picture,
+      reward: reward,
+      id: id,
       );
 }

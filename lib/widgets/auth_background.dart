@@ -42,8 +42,8 @@ class _PurpleBox extends StatelessWidget {
       width: double.infinity,
       height: size.height * 0.4,
       decoration: _purpleBackground(),
-      child: Stack(
-        children: const [
+      child: const Stack(
+        children: [
           Positioned(child: _Bubble(), top: 90,left: 30),
           Positioned(child: _Bubble(), top: -40,left: -30),
           Positioned(child: _Bubble(), top: -50,right: -20),

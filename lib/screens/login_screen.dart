@@ -118,10 +118,11 @@ class _LoginForm extends StatelessWidget {
 
                 //TODO: login form
                 FocusScope.of(context).unfocus();
-                final authService = Provider.of<AuthService>(context, listen: false);
+                //final authService = Provider.of<AuthService>(context, listen: false);
                 if (!LoginForm.isValidForm())return;
                 LoginForm.isLoading = true;
-                final String? errorMessage =  await authService.login(LoginForm.email,LoginForm.password);
+               // final String? errorMessage =  await authService.login(LoginForm.email,LoginForm.password);
+               final String? errorMessage=null;
                 if(errorMessage== null){
                   Navigator.pushReplacementNamed(context, 'home');
                 }else{

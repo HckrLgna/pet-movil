@@ -7,7 +7,7 @@ import 'package:pets_movil/models/pets.dart';
 import 'package:http/http.dart' as http;
 
 class PetsService extends ChangeNotifier{
-  final String _baseUrl = 'flutter-pet-73e62-default-rtdb.firebaseio.com';
+  final String _baseUrl = 'pets-b8a4e-default-rtdb.firebaseio.com';
   final List<Pet> pets = [];
   late Pet? selectedPet;
   final storage = new FlutterSecureStorage();

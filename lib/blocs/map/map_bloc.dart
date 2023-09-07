@@ -38,7 +38,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     // -17.833278202048852, -63.18304726803052
     // -17.834101498711693, -63.18637012544121
     LatLng start = const LatLng(-17.833278202048852, -63.18304726803052);
-    LatLng end = const LatLng(-17.834101498711693, -63.18637012544121);
+    // LatLng end = const LatLng(-17.834101498711693, -63.18637012544121);
 
     final startMaker = await getAssetImageMarker('assets/encontrado1.png');
     final endMaker = await getAssetImageMarker('assets/perdido1.png');
@@ -54,18 +54,18 @@ class MapBloc extends Bloc<MapEvent, MapState> {
       )          
     );
 
-    final endMarker = Marker(
-      markerId: const MarkerId('end'),
-      position: end,
-      icon: endMaker,infoWindow: const InfoWindow(
-        title: 'PERDIDO',
-        snippet: 'Una mascota se perdio en esta ubicación' 
-      )                   
-    );
+    // final endMarker = Marker(
+    //   markerId: const MarkerId('end'),
+    //   position: end,
+    //   icon: endMaker,infoWindow: const InfoWindow(
+    //     title: 'PERDIDO',
+    //     snippet: 'Una mascota se perdio en esta ubicación' 
+    //   )                   
+    // );
   
     final currentMarkers = Map<String, Marker>.from( state.markers );
     currentMarkers['start'] = startMarker;
-    currentMarkers['end'] = endMarker;
+    // currentMarkers['end'] = endMarker;
     add( DisplayPolylinesEvent( const {}, currentMarkers ) );      
     
   }  

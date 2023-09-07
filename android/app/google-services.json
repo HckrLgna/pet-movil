@@ -1,23 +1,24 @@
 {
   "project_info": {
     "project_number": "523196247128",
+    "firebase_url": "https://pets-b8a4e-default-rtdb.firebaseio.com",
     "project_id": "pets-b8a4e",
     "storage_bucket": "pets-b8a4e.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:523196247128:android:54d383a7a48ae09db46e2d",
+        "mobilesdk_app_id": "1:523196247128:android:4479660649866735b46e2d",
         "android_client_info": {
-          "package_name": "com.example.pets_movil"
+          "package_name": "com.proyecto_software.pets_movil"
         }
       },
       "oauth_client": [
         {
-          "client_id": "523196247128-och60kg53i1bt613a94am9c7e1at85b0.apps.googleusercontent.com",
+          "client_id": "523196247128-jdngj2r29t3h548q3a3octih81hivtji.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.pets_movil",
+            "package_name": "com.proyecto_software.pets_movil",
             "certificate_hash": "62d7110da90b83b160b6ed75c7ceb00bd1d892a3"
           }
         },
